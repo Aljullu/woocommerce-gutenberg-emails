@@ -57,7 +57,14 @@ class WC_Gutenberg_Emails_Loader {
 	 * Create email template posts.
 	 */
 	public function create_templates() {
-		global $wpdb;
+		global $wpdb, $pagenow;
+
+		// Only run this on the WooCommerce Emails page.
+		// phpcs:disable WordPress.Security.NonceVerification.NoNonceVerification
+		if ( 'edit.php' !== $pagenow || ! isset( $_GET['post_type'] ) || 'woocommerce_email' !== $_GET['post_type'] ) {
+			return;
+		}
+		// phpcs:enable
 
 		// Get already installed templates.
 		$installed_templates = $wpdb->get_col(
@@ -67,7 +74,7 @@ class WC_Gutenberg_Emails_Loader {
 		$wc_emails = WC_Emails::instance();
 
 		foreach ( $wc_emails->emails as $key => $email ) {
-			if ( in_array( strtolower( $key ), $installed_templates ) ) {
+			if ( in_array( strtolower( $key ), $installed_templates, true ) ) {
 				continue;
 			}
 
