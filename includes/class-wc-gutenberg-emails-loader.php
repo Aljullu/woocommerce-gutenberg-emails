@@ -41,6 +41,8 @@ class WC_Gutenberg_Emails_Loader {
 				'map_meta_cap'     => true,
 				'capability_type'  => 'post',
 				'capabilities'     => array(
+					// We don't want users to be able to create/delete WooCommerce emails,
+					// so no user role has these capabilities by default.
 					'delete_post'            => 'delete_woocommerce_emails',
 					'delete_private_posts'   => 'delete_woocommerce_emails',
 					'delete_published_posts' => 'delete_woocommerce_emails',
