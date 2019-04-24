@@ -12,7 +12,7 @@
  * WC requires at least: 3.5.0
  * WC tested up to: 3.5.7
  *
- * @package WC_Admin
+ * @package WC_Gutenberg_Emails
  */
 
 if ( ! defined( 'WC_GUTENBERG_EMAILS_ABSPATH' ) ) {
@@ -22,7 +22,7 @@ if ( ! defined( 'WC_GUTENBERG_EMAILS_ABSPATH' ) ) {
 /**
  * Calls the loader method
  *
- * @see WC_Admin_Library::__construct()
+ * @see WC_Gutenberg_Emails_Loader::__construct()
  */
 function wc_gutenberg_emails_initialize() {
 	require_once WC_GUTENBERG_EMAILS_ABSPATH . 'includes/class-wc-gutenberg-emails-loader.php';

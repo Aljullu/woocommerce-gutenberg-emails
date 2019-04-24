@@ -1,4 +1,4 @@
-=== WooCommerce Admin ===
+=== WooCommerce Gutenberg Emails ===
 Contributors: automattic
 Tags: ecommerce, e-commerce, store, sales, emails, gutenberg, woo commerce, woocommerce
 Requires at least: 5.0.0
