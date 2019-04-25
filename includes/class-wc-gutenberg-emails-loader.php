@@ -14,7 +14,7 @@ class WC_Gutenberg_Emails_Loader {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'init_post_type' ) );
-		add_action( 'init', array( $this, 'create_emails' ) );
+		add_action( 'admin_init', array( $this, 'create_templates' ) );
 	}
 
 	/**
@@ -54,10 +54,41 @@ class WC_Gutenberg_Emails_Loader {
 	}
 
 	/**
-	 * Create emails content
+	 * Create email template posts.
 	 */
-	public function create_emails() {
-		// @todo
+	public function create_templates() {
+		global $wpdb, $pagenow;
+
+		// Only run this on the WooCommerce Emails page.
+		// phpcs:disable WordPress.Security.NonceVerification.NoNonceVerification
+		if ( 'edit.php' !== $pagenow || ! isset( $_GET['post_type'] ) || 'woocommerce_email' !== $_GET['post_type'] ) {
+			return;
+		}
+		// phpcs:enable
+
+		// Get already installed templates.
+		$installed_templates = $wpdb->get_col(
+			"SELECT post_name FROM {$wpdb->posts} WHERE post_type = 'woocommerce_email'"
+		);
+
+		$wc_emails = WC_Emails::instance();
+
+		foreach ( $wc_emails->emails as $key => $email ) {
+			if ( in_array( strtolower( $key ), $installed_templates, true ) ) {
+				continue;
+			}
+
+			wp_insert_post(
+				array(
+					'post_type'    => 'woocommerce_email',
+					'post_name'    => $key,
+					'post_title'   => $email->get_default_subject(),
+					'post_content' => '', // @todo Add blocks content for email.
+					'post_status'  => 'draft',
+					'post_excerpt' => $email->description,
+				)
+			);
+		}
 	}
 }
 
