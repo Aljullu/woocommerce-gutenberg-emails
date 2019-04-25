@@ -20,7 +20,7 @@ registerBlockType( 'woocommerce-gutenberg-emails/order-details', {
 	keywords: [ __( 'WooCommerce', 'woocommerce-gutenberg-emails' ) ],
 	description: __(
 		'Display order details in a table.',
-		'woo-gutenberg-products-block'
+		'woocommerce-gutenberg-emails'
 	),
 
 	/**
