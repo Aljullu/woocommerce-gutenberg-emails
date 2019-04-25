@@ -19,6 +19,10 @@ if ( ! defined( 'WC_GUTENBERG_EMAILS_ABSPATH' ) ) {
 	define( 'WC_GUTENBERG_EMAILS_ABSPATH', dirname( __FILE__ ) . '/' );
 }
 
+if ( ! defined( 'WC_GUTENBERG_EMAILS_PLUGIN_FILE' ) ) {
+	define( 'WC_GUTENBERG_EMAILS_PLUGIN_FILE', __FILE__ );
+}
+
 /**
  * Calls the loader method
  *
