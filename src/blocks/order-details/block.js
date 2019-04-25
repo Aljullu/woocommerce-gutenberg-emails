@@ -4,7 +4,7 @@
 import { Component } from '@wordpress/element';
 
 /**
- * Component to handle edit mode of "Featured Product".
+ * Component to handle edit mode of "Order Details".
  */
 class OrderDetails extends Component {
 	renderEditMode() {

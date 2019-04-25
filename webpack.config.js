@@ -9,13 +9,7 @@ const defaultConfig = require( './node_modules/@wordpress/scripts/config/webpack
 module.exports = {
 	...defaultConfig,
 	entry: {
-		// Blocks
 		'order-details': './src/blocks/order-details/index.js',
-	},
-	output: {
-		path: path.resolve( __dirname, './build/' ),
-		filename: '[name].js',
-		libraryTarget: 'this',
 	},
 	module: {
 		...defaultConfig.module,
