@@ -1,1 +1,1 @@
-console.log( 'test' ); // eslint-disable-line no-console
+console.log( 'Lorem Ipsum' ); // eslint-disable-line no-console

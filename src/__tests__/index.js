@@ -1,5 +1,5 @@
 describe( 'Example test', () => {
-  it( 'assert true', () => {
-    expect( true ).toBe( true );
-  } );
+	it( 'assert true', () => {
+		expect( true ).toBe( true );
+	} );
 } );
