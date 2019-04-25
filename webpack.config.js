@@ -15,7 +15,7 @@ module.exports = {
 		rules: [
 			...defaultConfig.module.rules,
 			{
-				test: /\.s[c|a]ss$/,
+				test: /\.scss$/,
 				use: [
 					'style-loader',
 					MiniCssExtractPlugin.loader,
