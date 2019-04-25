@@ -13,14 +13,32 @@ class WC_Gutenberg_Emails_Loader {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'init_post_type' ) );
+		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'create_templates' ) );
 	}
 
 	/**
-	 * Init post types
+	 * Init
 	 */
-	public function init_post_type() {
+	public function init() {
+		$this->register_post_type();
+		$this->register_blocks();
+		add_filter( 'block_categories', array( $this, 'add_block_category' ) );
+
+		$block_dependencies = array(
+			'wp-blocks',
+			'wp-element',
+			'wp-i18n',
+		);
+
+		wp_register_script( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.js', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), $block_dependencies, '0.1.0' );
+		wp_register_style( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), '0.1.0' );
+	}
+
+	/**
+	 * Register post type
+	 */
+	public function register_post_type() {
 		if ( post_type_exists( 'woocommerce_email' ) ) {
 			return;
 		}
@@ -48,6 +66,38 @@ class WC_Gutenberg_Emails_Loader {
 					'delete_published_posts' => 'delete_woocommerce_emails',
 					'delete_others_posts'    => 'delete_woocommerce_emails',
 					'create_posts'           => 'create_woocommerce_emails',
+				),
+			)
+		);
+	}
+
+	/**
+	 * Register blocks
+	 */
+	public function register_blocks() {
+		register_block_type(
+			'woocommerce-gutenberg-emails/order-details',
+			array(
+				'editor_script' => 'wc-gutenberg-emails-order-details',
+				'style'         => 'wc-gutenberg-emails-order-details',
+			)
+		);
+	}
+
+	/**
+	 * Create block category
+	 *
+	 * @param array $categories Array of categories.
+	 * @return array Array of block categories.
+	 */
+	public function add_block_category( $categories ) {
+		return array_merge(
+			$categories,
+			array(
+				array(
+					'slug'  => 'woocommerce-gutenberg-emails',
+					'title' => __( 'WooCommerce Gutenberg Emails', 'woocommerce-gutenberg-emails' ),
+					'icon'  => 'woocommerce',
 				),
 			)
 		);

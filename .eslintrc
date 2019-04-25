@@ -1,0 +1,9 @@
+/** @format */
+{
+	"root": true,
+	"extends": [ 'plugin:@wordpress/eslint-plugin/recommended' ],
+	"plugins": [ "jest" ],
+	"env": {
+		"jest/globals": true,
+	},
+}
