@@ -8,7 +8,6 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import Block from './block';
 import './style.scss';
 
 /**
@@ -26,11 +25,14 @@ registerBlockType( 'woocommerce-gutenberg-emails/order-details', {
 	/**
 	 * Renders and manages the block.
 	 *
-	 * @param {Object} props
 	 * @return {Object} Editor component.
 	 */
-	edit( props ) {
-		return <Block { ...props } />;
+	edit() {
+		return (
+			<span className="lorem-ipsum">
+				{ 'Lorem ipsum' }
+			</span>
+		);
 	},
 
 	/**
