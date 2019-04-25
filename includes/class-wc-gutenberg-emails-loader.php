@@ -73,7 +73,7 @@ class WC_Gutenberg_Emails_Loader {
 
 		$wc_emails = WC_Emails::instance();
 
-		foreach ( $wc_emails->emails as $key => $email ) {
+		foreach ( $wc_emails->get_emails() as $key => $email ) {
 			if ( in_array( strtolower( $key ), $installed_templates, true ) ) {
 				continue;
 			}
