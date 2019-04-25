@@ -25,6 +25,9 @@ registerBlockType( 'woocommerce-gutenberg-emails/order-details', {
 
 	/**
 	 * Renders and manages the block.
+	 *
+	 * @param {Object} props
+	 * @return {Object} Editor component.
 	 */
 	edit( props ) {
 		return <Block { ...props } />;
@@ -32,6 +35,8 @@ registerBlockType( 'woocommerce-gutenberg-emails/order-details', {
 
 	/**
 	 * Block content is rendered in PHP, not via save function.
+	 *
+	 * @return {Object} Visible component.
 	 */
 	save() {
 		return <InnerBlocks.Content />;
