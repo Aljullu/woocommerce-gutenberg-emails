@@ -28,7 +28,6 @@ class WC_Gutenberg_Emails_Loader {
 		$block_dependencies = array(
 			'wp-blocks',
 			'wp-element',
-			'wp-editor',
 			'wp-i18n',
 		);
 

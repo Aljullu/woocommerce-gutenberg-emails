@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { InnerBlocks } from '@wordpress/editor';
 import { registerBlockType } from '@wordpress/blocks';
 
 /**
@@ -41,6 +40,10 @@ registerBlockType( 'woocommerce-gutenberg-emails/order-details', {
 	 * @return {Object} Visible component.
 	 */
 	save() {
-		return <InnerBlocks.Content />;
+		return (
+			<span className="lorem-ipsum">
+				{ 'Lorem ipsum' }
+			</span>
+		);
 	},
 } );
