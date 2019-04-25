@@ -100,9 +100,8 @@ class WC_Gutenberg_Emails_Email {
 		$email_class = get_class( $this->email_class );
 		$template    = $this->get_template();
 
-		if ( property_exists( $this->email_class, 'plain_text' ) && $this->email_class->plain_text ) {
-			// @todo Set plain text email and strip tags.
-			$email_content = '';
+		if ( 'plain' === $this->email_class->get_email_type() ) {
+			$email_content = wordwrap( preg_replace( $this->email_class->plain_search, $this->email_class->plain_replace, wp_strip_all_tags( $template->post_content ) ), 70 );
 		} else {
 			$wc_email      = new WC_Email();
 			$email_content = $wc_email->style_inline( $template->post_content );
