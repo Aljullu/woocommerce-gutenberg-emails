@@ -49,7 +49,6 @@
     "lint:js": "wp-scripts lint-js .",
     "lint:pkg-json": "wp-scripts lint-pkg-json .",
     "start": "wp-scripts start",
-    "test:e2e": "wp-scripts test-e2e",
-    "test:unit": "wp-scripts test-unit-js"
+    "test": "wp-scripts test-unit-js"
   }
 }
