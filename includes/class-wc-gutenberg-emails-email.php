@@ -92,6 +92,32 @@ class WC_Gutenberg_Emails_Email {
 	}
 
 	/**
+	 * Get an array of strings to find for replacement.
+	 *
+	 * @return array
+	 */
+	public function get_plain_search() {
+		$plain_search = array(
+			'/^\s+/m', // Multiple blank lines.
+		);
+
+		return array_merge( $this->email_class->plain_search, $plain_search );
+	}
+
+	/**
+	 * Get an array of items used to replace found strings.
+	 *
+	 * @return array
+	 */
+	public function get_plain_replace() {
+		$plain_replace = array(
+			"\r\n", // Multiple blank lines.
+		);
+
+		return array_merge( $this->email_class->plain_replace, $plain_replace );
+	}
+
+	/**
 	 * Replace the email content with the saved template.
 	 *
 	 * @return string
@@ -101,7 +127,7 @@ class WC_Gutenberg_Emails_Email {
 		$template    = $this->get_template();
 
 		if ( 'plain' === $this->email_class->get_email_type() ) {
-			$email_content = wordwrap( preg_replace( $this->email_class->plain_search, $this->email_class->plain_replace, wp_strip_all_tags( $template->post_content ) ), 70 );
+			$email_content = wordwrap( preg_replace( $this->get_plain_search(), $this->get_plain_replace(), wp_strip_all_tags( $template->post_content ) ), 70 );
 		} else {
 			$wc_email      = new WC_Email();
 			$email_content = $wc_email->style_inline( $template->post_content );
