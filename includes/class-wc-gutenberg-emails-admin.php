@@ -16,6 +16,14 @@ class WC_Gutenberg_Emails_Admin {
 		add_filter( 'manage_woocommerce_email_posts_columns', array( $this, 'add_post_list_columns' ) );
 		add_filter( 'manage_woocommerce_email_posts_custom_column', array( $this, 'add_custom_column_data' ), 10, 2 );
 		add_filter( 'enter_title_here', array( $this, 'update_title_to_subject' ), 10, 2 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_scripts_and_styles' ) );
+	}
+
+	/**
+	 * Enqueue scripts and styles.
+	 */
+	public function enqueue_scripts_and_styles() {
+		wp_enqueue_style( 'wc-gutenberg-emails-admin', plugins_url( 'build/admin.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), '0.1.0' );
 	}
 
 	/**
