@@ -144,8 +144,14 @@ class WC_Gutenberg_Emails_Email {
 	public function get_placeholders() {
 		$placeholders = array();
 
-		$placeholders['{site_title}'] = $this->email_class->get_blogname();
-		$placeholders['{blogname}']   = $this->email_class->get_blogname();
+		$placeholders['{site_title}']   = $this->email_class->get_blogname();
+		$placeholders['{blogname}']     = $this->email_class->get_blogname();
+		$placeholders['{heading}']      = $this->email_class->get_default_heading();
+		$placeholders['{footer}']       = wpautop( wp_kses_post( wptexturize( apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) ) ) ) );
+		$placeholders['{header_image}'] = '';
+		if ( $img = get_option( 'woocommerce_email_header_image' ) ) {
+			$placeholders['{header_image}'] = '<p style="margin-top:0;"><img src="' . esc_url( $img ) . '" alt="' . get_bloginfo( 'name', 'display' ) . '" /></p>';
+		}
 
 		if ( is_a( $this->email_class->object, 'WC_Order' ) ) {
 			$placeholders['{order_date}']              = wc_format_datetime( $this->email_class->object->get_date_created() );

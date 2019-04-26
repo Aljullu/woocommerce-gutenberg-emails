@@ -9,6 +9,7 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		'order-details': './src/blocks/order-details/index.js',
+		'email-wrapper': './src/blocks/email-wrapper/index.js',
 	},
 	module: {
 		...defaultConfig.module,

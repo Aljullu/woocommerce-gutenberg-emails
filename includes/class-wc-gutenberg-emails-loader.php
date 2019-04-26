@@ -27,11 +27,13 @@ class WC_Gutenberg_Emails_Loader {
 
 		$block_dependencies = array(
 			'wp-blocks',
+			'wp-editor',
 			'wp-element',
 			'wp-i18n',
 		);
 
 		wp_register_script( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.js', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), $block_dependencies, '0.1.0' );
+		wp_register_script( 'wc-gutenberg-emails-email-wrapper', plugins_url( 'build/email-wrapper.js', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), $block_dependencies, '0.1.0' );
 		wp_register_style( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), '0.1.0' );
 	}
 
@@ -80,6 +82,12 @@ class WC_Gutenberg_Emails_Loader {
 			array(
 				'editor_script' => 'wc-gutenberg-emails-order-details',
 				'style'         => 'wc-gutenberg-emails-order-details',
+			)
+		);
+		register_block_type(
+			'woocommerce-gutenberg-emails/email-wrapper',
+			array(
+				'editor_script' => 'wc-gutenberg-emails-email-wrapper',
 			)
 		);
 	}
