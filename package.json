@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@wordpress/blocks": "^6.2.4",
+    "@wordpress/editor": "^9.2.4",
     "@wordpress/element": "^2.3.0",
     "@wordpress/i18n": "^3.3.0",
     "@wordpress/scripts": "^3.1.0",
