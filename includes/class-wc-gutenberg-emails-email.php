@@ -62,7 +62,7 @@ class WC_Gutenberg_Emails_Email {
 		}
 
 		// Email subject.
-		$mail_args[1] = $template->post_title;
+		$mail_args[1] = $this->replace_placeholders( $template->post_title );
 		// Email content.
 		$mail_args[2] = $this->get_content();
 
@@ -108,7 +108,69 @@ class WC_Gutenberg_Emails_Email {
 			$email_content = $wc_email->style_inline( $template->post_content );
 		}
 
-		return $email_content;
+		return $this->replace_placeholders( $email_content );
+	}
+
+	/**
+	 * Get placeholders from email class objects.
+	 *
+	 * @return array
+	 */
+	public function get_placeholders() {
+		$placeholders = array();
+
+		$placeholders['{site_title}'] = $this->email_class->get_blogname();
+		$placeholders['{blogname}']   = $this->email_class->get_blogname();
+
+		if ( is_a( $this->email_class->object, 'WC_Order' ) ) {
+			$placeholders['{order_date}']              = wc_format_datetime( $this->email_class->object->get_date_created() );
+			$placeholders['{order_number}']            = $this->email_class->object->get_order_number();
+			$placeholders['{order_billing_full_name}'] = $this->email_class->object->get_formatted_billing_full_name();
+		}
+
+		if ( is_a( $this->email_class->object, 'WP_User' ) ) {
+			$placeholders['{user_login}']        = stripslashes( $this->email_class->object->user_login );
+			$placeholders['{user_email}']        = stripslashes( $this->email_class->object->user_email );
+			$placeholders['{lost_password_url}'] = esc_url(
+				add_query_arg(
+					array(
+						'key' => $this->email_class->reset_key,
+						'id'  => $this->email_class->object->ID,
+					),
+					wc_get_endpoint_url(
+						'lost-password',
+						'',
+						wc_get_page_permalink( 'myaccount' )
+					)
+				)
+			);
+		}
+
+		if ( property_exists( $this->email_class, 'user_pass' ) ) {
+			$placeholders['{user_pass}'] = $this->email_class->user_pass;
+		}
+		if ( property_exists( $this->email_class, 'password_generated' ) ) {
+			$placeholders['{password_generated}'] = $this->email_class->password_generated;
+		}
+		if ( property_exists( $this->email_class, 'customer_note' ) ) {
+			$placeholders['{customer_note}'] = $this->email_class->customer_note;
+		}
+
+		return $placeholders;
+	}
+
+	/**
+	 * Replace placeholders with object content.
+	 *
+	 * @param string $string String to search.
+	 * @return string
+	 */
+	public function replace_placeholders( $string ) {
+		$placeholders = $this->get_placeholders();
+		$find         = array_keys( $placeholders );
+		$replace      = array_values( $placeholders );
+
+		return apply_filters( 'woocommerce_email_format_string', str_replace( $find, $replace, $string ), $this );
 	}
 }
 WC_Gutenberg_Emails_Email::instance();
