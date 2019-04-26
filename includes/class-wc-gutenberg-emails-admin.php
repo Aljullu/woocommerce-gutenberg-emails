@@ -23,7 +23,7 @@ class WC_Gutenberg_Emails_Admin {
 	 * Enqueue scripts and styles.
 	 */
 	public function enqueue_scripts_and_styles() {
-		wp_enqueue_style( 'wc-gutenberg-emails-admin', plugins_url( 'build/admin.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), '0.1.0' );
+		wp_enqueue_style( 'wc-gutenberg-emails-admin', plugins_url( 'build/admin.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), WC_GUTENBERG_EMAILS_VERSION );
 	}
 
 	/**
