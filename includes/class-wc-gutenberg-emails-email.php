@@ -155,9 +155,6 @@ class WC_Gutenberg_Emails_Email {
 		if ( property_exists( $this->email_class, 'customer_note' ) ) {
 			$placeholders['{customer_note}'] = $this->email_class->customer_note;
 		}
-		if ( property_exists( $this->email_class, 'customer_note' ) ) {
-			$placeholders['{customer_note}'] = $this->email_class->customer_note;
-		}
 
 		return $placeholders;
 	}
