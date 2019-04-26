@@ -8,6 +8,7 @@ const defaultConfig = require( './node_modules/@wordpress/scripts/config/webpack
 module.exports = {
 	...defaultConfig,
 	entry: {
+		placeholders: './src/blocks/placeholders/index.js',
 		'order-details': './src/blocks/order-details/index.js',
 	},
 	module: {
