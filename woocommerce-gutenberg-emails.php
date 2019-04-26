@@ -30,5 +30,6 @@ if ( ! defined( 'WC_GUTENBERG_EMAILS_PLUGIN_FILE' ) ) {
  */
 function wc_gutenberg_emails_initialize() {
 	require_once WC_GUTENBERG_EMAILS_ABSPATH . 'includes/class-wc-gutenberg-emails-loader.php';
+	require_once WC_GUTENBERG_EMAILS_ABSPATH . 'includes/class-wc-gutenberg-emails-email.php';
 }
 add_action( 'woocommerce_loaded', 'wc_gutenberg_emails_initialize' );
