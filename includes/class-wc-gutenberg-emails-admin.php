@@ -15,6 +15,7 @@ class WC_Gutenberg_Emails_Admin {
 	public function __construct() {
 		add_filter( 'manage_woocommerce_email_posts_columns', array( $this, 'add_post_list_columns' ) );
 		add_filter( 'manage_woocommerce_email_posts_custom_column', array( $this, 'add_custom_column_data' ), 10, 2 );
+		add_filter( 'enter_title_here', array( $this, 'update_title_to_subject' ), 10, 2 );
 	}
 
 	/**
@@ -54,6 +55,21 @@ class WC_Gutenberg_Emails_Admin {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Update the "Add title" text to "Add email subject"
+	 *
+	 * @param string $text Text to display.
+	 * @param object $post WP_Post object.
+	 * @return string
+	 */
+	public function update_title_to_subject( $text, $post ) {
+		if ( 'woocommerce_email' === $post->post_type ) {
+			return __( 'Add email subject', 'woocommerce-gutenberg-emails' );
+		}
+
+		return $text;
 	}
 }
 
