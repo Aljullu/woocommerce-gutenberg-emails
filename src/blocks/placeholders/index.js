@@ -84,7 +84,7 @@ placeholders.forEach( ( placeholder ) => {
 		},
 
 		/**
-		 * Block content is rendered in PHP, not via save function.
+		 * Save the block content in the post content.
 		 *
 		 * @return {Object} Visible component.
 		 */
