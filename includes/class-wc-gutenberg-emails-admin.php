@@ -82,19 +82,19 @@ class WC_Gutenberg_Emails_Admin {
 	}
 
 	/**
-	 * Restrict post statuses to draft and published.
+	 * Restrict post statuses to draft, pending, or published.
 	 *
 	 * @param string $new_status New status.
 	 * @param string $old_status Old status.
 	 * @param object $post WP_Post.
 	 */
 	public function restrict_post_transition( $new_status, $old_status, $post ) {
-		$allowed_statuses = array( 'published', 'draft' );
+		$allowed_statuses = array( 'published', 'pending', 'draft' );
 
 		if ( ! in_array( $new_status, $allowed_statuses, true ) ) {
 			$post->post_status = 'draft';
 			wp_update_post( $post );
-			wp_die( esc_html__( 'Email templates can only be set to published or draft.', 'woocommerce-gutenberg-emails' ) );
+			wp_die( esc_html__( 'Email templates can only be set to published, pending, or draft.', 'woocommerce-gutenberg-emails' ) );
 		}
 	}
 }
