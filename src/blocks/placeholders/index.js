@@ -49,7 +49,7 @@ const placeholders = [
 		description: __( 'Display the user email address.', 'woocommerce-gutenberg-emails' ),
 	},
 	{
-		name: 'password-generateod',
+		name: 'password-generated',
 		title: __( 'Generated Password', 'woocommerce-gutenberg-emails' ),
 		description: __( 'Display the randomly generated password for the user.', 'woocommerce-gutenberg-emails' ),
 	},
