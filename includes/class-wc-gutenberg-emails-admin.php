@@ -94,7 +94,7 @@ class WC_Gutenberg_Emails_Admin {
 		if ( ! in_array( $new_status, $allowed_statuses, true ) ) {
 			$post->post_status = 'draft';
 			wp_update_post( $post );
-			wp_die( esc_html__( 'Email templates can only be set to published or pending.', 'woocommerce-gutenberg-emails' ) );
+			wp_die( esc_html__( 'Email templates can only be set to published or draft.', 'woocommerce-gutenberg-emails' ) );
 		}
 	}
 }
