@@ -15,6 +15,10 @@
  * @package WC_Gutenberg_Emails
  */
 
+if ( ! defined( 'WC_GUTENBERG_EMAILS_VERSION' ) ) {
+	define( 'WC_GUTENBERG_EMAILS_VERSION', '0.1.0' );
+}
+
 if ( ! defined( 'WC_GUTENBERG_EMAILS_ABSPATH' ) ) {
 	define( 'WC_GUTENBERG_EMAILS_ABSPATH', dirname( __FILE__ ) . '/' );
 }

@@ -31,8 +31,8 @@ class WC_Gutenberg_Emails_Loader {
 			'wp-i18n',
 		);
 
-		wp_register_script( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.js', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), $block_dependencies, '0.1.0' );
-		wp_register_style( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), '0.1.0' );
+		wp_register_script( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.js', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), $block_dependencies, WC_GUTENBERG_EMAILS_VERSION );
+		wp_register_style( 'wc-gutenberg-emails-order-details', plugins_url( 'build/order-details.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), WC_GUTENBERG_EMAILS_VERSION );
 	}
 
 	/**

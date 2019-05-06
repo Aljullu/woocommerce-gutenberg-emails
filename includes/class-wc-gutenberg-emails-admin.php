@@ -16,6 +16,15 @@ class WC_Gutenberg_Emails_Admin {
 		add_filter( 'manage_woocommerce_email_posts_columns', array( $this, 'add_post_list_columns' ) );
 		add_filter( 'manage_woocommerce_email_posts_custom_column', array( $this, 'add_custom_column_data' ), 10, 2 );
 		add_filter( 'enter_title_here', array( $this, 'update_title_to_subject' ), 10, 2 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_scripts_and_styles' ) );
+		add_action( 'transition_post_status', array( $this, 'restrict_post_transition' ), 10, 3 );
+	}
+
+	/**
+	 * Enqueue scripts and styles.
+	 */
+	public function enqueue_scripts_and_styles() {
+		wp_enqueue_style( 'wc-gutenberg-emails-admin', plugins_url( 'build/admin.css', WC_GUTENBERG_EMAILS_PLUGIN_FILE ), array(), WC_GUTENBERG_EMAILS_VERSION );
 	}
 
 	/**
@@ -70,6 +79,23 @@ class WC_Gutenberg_Emails_Admin {
 		}
 
 		return $text;
+	}
+
+	/**
+	 * Restrict post statuses to draft, pending, or published.
+	 *
+	 * @param string $new_status New status.
+	 * @param string $old_status Old status.
+	 * @param object $post WP_Post.
+	 */
+	public function restrict_post_transition( $new_status, $old_status, $post ) {
+		$allowed_statuses = array( 'published', 'pending', 'draft' );
+
+		if ( ! in_array( $new_status, $allowed_statuses, true ) ) {
+			$post->post_status = 'draft';
+			wp_update_post( $post );
+			wp_die( esc_html__( 'Email templates can only be set to published, pending, or draft.', 'woocommerce-gutenberg-emails' ) );
+		}
 	}
 }
 
